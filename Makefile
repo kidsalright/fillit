@@ -6,7 +6,7 @@
 #    By: yberries <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:27:22 by yberries          #+#    #+#              #
-#    Updated: 2020/01/20 14:27:27 by yberries         ###   ########.fr        #
+#    Updated: 2020/01/20 21:22:29 by yberries         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = fillit
 
 SRC = $(addsuffix .c, \
 	  main \
-	  read_validate)
+	  read_validate \
+	  map)
 
 OBJ = $(SRC:.c=.o)
 

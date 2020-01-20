@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:01:46 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/20 15:15:45 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/20 23:05:55 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		blocks_validation(char *str, int *hash, int *con, int *empty)
 	while (str[i])
 	{
 		if (str[i] != '\n' && str[i] != '.' && str[i] != '#')
-			return (0);
+			error();
 		if (str[i] == '.')
 			++(*empty);
 		if (str[i] == '#')
@@ -85,11 +85,73 @@ int		tetr_count(char *file)
 	return (count);
 }
 
+char	**tetr_to_string(char *file, int count)
+{
+	int		fd;
+	int		res;
+	char	*buf;
+	char	**str;
+	int		i;
+
+	i = 0;
+	buf = ft_strnew(21);
+	if (!(str = (char**)malloc(sizeof(char*) * (count + 1))))
+		return (0);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	while ((res = read(fd, buf, 21)))
+	{
+		str[i] = ft_strdup(buf);
+		++i;
+	}
+	free(buf);
+	if (close(fd) == -1)
+		return (0);
+	return (str);
+}
+
 char	***read_validate(char *file)
 {
+	char	***map;
 	int		count;
+	char	**str;
+	int		i;
+	int		j;
+	int		k;
 
 	if (!(count = tetr_count(file)))
 		error();
+	if (!(str = tetr_to_string(file, count)))
+		error();
+	if (!(map = map_create(count, 4, '.')))
+		error();
+	map_fill(map, str);
+	map_cleanrow(map);
+	map_cleancol(map);
+	i = 0;
+	j = 0;
+	k = 0;
+	while (k < count)
+	{
+		while (map[i])
+		{
+			while (map[i][j])
+			{
+				printf("%s", map[i][j]);
+				++j;
+			}
+			j = 0;
+			++i;
+		}
+		i = 0;
+		++k;
+	}
+	while (i < count)
+	{
+		ft_strdel(&str[i]);
+		++i;
+	}
+	free(str);
 	return (0);
 }
