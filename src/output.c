@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 19:30:53 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 19:34:23 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:03:01 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,53 +33,53 @@ void	map_free(char ***map)
 	free(map);
 }
 
-int		**row_free(char **row)
+int		**solve_free(char **solve)
 {
 	int i;
 
 	i = 0;
-	while (row[i])
+	while (solve[i])
 	{
-		free(row[i]);
+		free(solve[i]);
 		++i;
 	}
-	free(row);
-	row = NULL;
+	free(solve);
+	solve = NULL;
 	return (0);
 }
 
-void	row_output(char **row)
+void	solve_output(char **solve)
 {
 	int	i;
 
 	i = 0;
-	while (row[i])
+	while (solve[i])
 	{
-		ft_putendl(row[i]);
+		ft_putendl(solve[i]);
 		++i;
 	}
 }
 
-char	**row_create(int size)
+char	**solve_create(int size)
 {
 	int		rows;
 	int		fill;
-	char	**row;
+	char	**solve;
 
 	rows = 0;
 	fill = 0;
-	row = (char**)malloc(sizeof(char*) * (size + 1));
+	solve = (char**)malloc(sizeof(char*) * (size + 1));
 	while (rows < size)
 	{
-		row[rows] = (char*)malloc(sizeof(char) * (size + 1));
+		solve[rows] = (char*)malloc(sizeof(char) * (size + 1));
 		while (fill < size)
-			row[rows][fill++] = '.';
-		row[rows][fill] = 0;
+			solve[rows][fill++] = '.';
+		solve[rows][fill] = 0;
 		fill = 0;
 		++rows;
 	}
-	row[rows] = NULL;
-	return (row);
+	solve[rows] = NULL;
+	return (solve);
 }
 
 int		blocks_count(char ***map)
