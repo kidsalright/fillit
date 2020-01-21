@@ -6,26 +6,11 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:43:28 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 17:58:00 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:35:06 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int		**free_row(char **row)
-{
-	int i;
-
-	i = 0;
-	while (row[i])
-	{
-		free(row[i]);
-		++i;
-	}
-	free(row);
-	row = NULL;
-	return (0);
-}
 
 void	clean_row(char **row, char **map, int i, int j)
 {
@@ -120,50 +105,6 @@ int		backtracking(char **row, char ***map, int vars)
 	return (1);
 }
 
-char	**row_create(int size)
-{
-	int		rows;
-	int		fill;
-	char	**row;
-
-	rows = 0;
-	fill = 0;
-	row = (char**)malloc(sizeof(char*) * (size + 1));
-	while (rows < size)
-	{
-		row[rows] = (char*)malloc(sizeof(char) * (size + 1));
-		while (fill < size)
-			row[rows][fill++] = '.';
-		row[rows][fill] = 0;
-		fill = 0;
-		++rows;
-	}
-	row[rows] = NULL;
-	return (row);
-}
-
-int		blocks_count(char ***map)
-{
-	int	blocks;
-
-	blocks = 0;
-	while (map[blocks])
-		++blocks;
-	return (blocks);
-}
-
-void	row_output(char **row)
-{
-	int	i;
-
-	i = 0;
-	while (row[i])
-	{
-		ft_putendl(row[i]);
-		++i;
-	}
-}
-
 void	solution(char ***map)
 {
 	int		min_size;
@@ -178,21 +119,10 @@ void	solution(char ***map)
 	while (backtracking(row, map, 0))
 	{
 		++min_size;
-		free_row(row);
+		row_free(row);
 		row = row_create(min_size);
 	}
 	row_output(row);
-	free_row(row);
-	while (map[i])
-	{
-		while (map[i][j])
-		{
-			free(map[i][j]);
-			++j;
-		}
-		j = 0;
-		free(map[i]);
-		++i;
-	}
-	free(map);
+	row_free(row);
+	map_free(map);
 }
