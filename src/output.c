@@ -6,31 +6,31 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 19:30:53 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 21:03:01 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:18:35 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	map_free(char ***map)
+void	tetr_free(char ***tetr)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (map[i])
+	while (tetr[i])
 	{
-		while (map[i][j])
+		while (tetr[i][j])
 		{
-			free(map[i][j]);
+			free(tetr[i][j]);
 			++j;
 		}
 		j = 0;
-		free(map[i]);
+		free(tetr[i]);
 		++i;
 	}
-	free(map);
+	free(tetr);
 }
 
 int		**solve_free(char **solve)
@@ -82,12 +82,12 @@ char	**solve_create(int size)
 	return (solve);
 }
 
-int		blocks_count(char ***map)
+int		blocks_count(char ***tetr)
 {
 	int	blocks;
 
 	blocks = 0;
-	while (map[blocks])
+	while (tetr[blocks])
 		++blocks;
 	return (blocks);
 }

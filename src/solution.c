@@ -6,24 +6,24 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:43:28 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 21:02:31 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:18:38 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	clean_row(char **solve, char **map, int i, int j)
+void	clean_row(char **solve, char **tetr, int i, int j)
 {
 	int rows;
 	int fill;
 
 	rows = 0;
 	fill = 0;
-	while (map[rows])
+	while (tetr[rows])
 	{
-		while (map[rows][fill])
+		while (tetr[rows][fill])
 		{
-			if (map[rows][fill] != '.')
+			if (tetr[rows][fill] != '.')
 				solve[i + rows][j + fill] = '.';
 			++fill;
 		}
@@ -32,19 +32,19 @@ void	clean_row(char **solve, char **map, int i, int j)
 	}
 }
 
-void	insert_row(char **solve, char **map, int i, int j)
+void	insert_row(char **solve, char **tetr, int i, int j)
 {
 	int rows;
 	int fill;
 
 	rows = 0;
 	fill = 0;
-	while (map[rows])
+	while (tetr[rows])
 	{
-		while (map[rows][fill])
+		while (tetr[rows][fill])
 		{
-			if (map[rows][fill] != '.')
-				solve[i + rows][j + fill] = map[rows][fill];
+			if (tetr[rows][fill] != '.')
+				solve[i + rows][j + fill] = tetr[rows][fill];
 			++fill;
 		}
 		fill = 0;
@@ -52,22 +52,22 @@ void	insert_row(char **solve, char **map, int i, int j)
 	}
 }
 
-int		insert_check(char **solve, char **map, int i, int j)
+int		insert_check(char **solve, char **tetr, int i, int j)
 {
 	int rows;
 	int	fill;
 
 	rows = 0;
 	fill = 0;
-	while (map[rows])
+	while (tetr[rows])
 	{
 		if (solve[i + rows] == 0)
 			return (0);
-		while (map[rows][fill])
+		while (tetr[rows][fill])
 		{
 			if (solve[i + rows][j + fill] == 0)
 				return (0);
-			if (map[rows][fill] != '.' && solve[i + rows][j + fill] != '.')
+			if (tetr[rows][fill] != '.' && solve[i + rows][j + fill] != '.')
 				return (0);
 			++fill;
 		}
@@ -77,25 +77,25 @@ int		insert_check(char **solve, char **map, int i, int j)
 	return (1);
 }
 
-int		backtracking(char **solve, char ***map, int vars)
+int		backtracking(char **solve, char ***tetr, int vars)
 {
 	int	rows;
 	int	fill;
 
 	rows = 0;
 	fill = 0;
-	if (map[vars] == 0)
+	if (tetr[vars] == 0)
 		return (0);
 	while (solve[rows])
 	{
 		while (solve[rows][fill])
 		{
-			if (insert_check(solve, map[vars], rows, fill))
+			if (insert_check(solve, tetr[vars], rows, fill))
 			{
-				insert_row(solve, map[vars], rows, fill);
-				if (!backtracking(solve, map, vars + 1))
+				insert_row(solve, tetr[vars], rows, fill);
+				if (!backtracking(solve, tetr, vars + 1))
 					return (0);
-				clean_row(solve, map[vars], rows, fill);
+				clean_row(solve, tetr[vars], rows, fill);
 			}
 			++fill;
 		}
@@ -105,7 +105,7 @@ int		backtracking(char **solve, char ***map, int vars)
 	return (1);
 }
 
-void	solution(char ***map)
+void	solution(char ***tetr)
 {
 	int		min_size;
 	char	**solve;
@@ -114,9 +114,9 @@ void	solution(char ***map)
 
 	i = 0;
 	j = 0;
-	min_size = ft_root(2, blocks_count(map) * 4);
+	min_size = ft_root(2, blocks_count(tetr) * 4);
 	solve = solve_create(min_size);
-	while (backtracking(solve, map, 0))
+	while (backtracking(solve, tetr, 0))
 	{
 		++min_size;
 		solve_free(solve);
@@ -124,5 +124,5 @@ void	solution(char ***map)
 	}
 	solve_output(solve);
 	solve_free(solve);
-	map_free(map);
+	tetr_free(tetr);
 }

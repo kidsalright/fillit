@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:01:46 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 19:20:34 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:15:25 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		blocks_validation(char *str, int *hash, int *con, int *empty)
 	return (0);
 }
 
-int		map_validation(char *str)
+int		tetr_validation(char *str)
 {
 	int	hash;
 	int	empty;
@@ -72,7 +72,7 @@ int		tetr_count(char *file)
 	buf = ft_strnew(21);
 	while ((res = read(fd, buf, 21)))
 	{
-		if (!(map_validation(buf)) || res < 20)
+		if (!(tetr_validation(buf)) || res < 20)
 			error();
 		++count;
 		newres = res;
@@ -113,7 +113,7 @@ char	**tetr_to_string(char *file, int count)
 
 char	***read_validate(char *file)
 {
-	char	***map;
+	char	***tetr;
 	int		count;
 	char	**str;
 	int		i;
@@ -122,11 +122,11 @@ char	***read_validate(char *file)
 		error();
 	if (!(str = tetr_to_string(file, count)))
 		error();
-	if (!(map = map_create(count, 4)))
+	if (!(tetr = tetr_create(count, 4)))
 		error();
-	map_fill(map, str);
-	map_cleanrow(map);
-	map_cleancol(map);
+	tetr_fill(tetr, str);
+	tetr_cleanrow(tetr);
+	tetr_cleancol(tetr);
 	i = 0;
 	while (i < count)
 	{
@@ -134,5 +134,5 @@ char	***read_validate(char *file)
 		++i;
 	}
 	free(str);
-	return (map);
+	return (tetr);
 }

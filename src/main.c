@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:29:41 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 19:18:43 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:15:23 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	error(void)
 
 int		main(int argc, char **argv)
 {
-	char ***map;
+	char ***tetr;
 
 	if (argc == 2)
 	{
-		map = read_validate(argv[1]);
-		solution(map);
+		tetr = read_validate(argv[1]);
+		solution(tetr);
 	}
 	else
 	{

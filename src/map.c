@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   tetr.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 20:58:42 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 18:14:18 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:15:44 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		col_clean(char ***map, int blocks, int rows, int fill)
+int		col_clean(char ***tetr, int blocks, int rows, int fill)
 {
 	int dots;
 
 	dots = 0;
-	while (map[blocks][rows])
+	while (tetr[blocks][rows])
 	{
-		if (map[blocks][rows][fill] == '.')
+		if (tetr[blocks][rows][fill] == '.')
 			++dots;
 		++rows;
 	}
 	if (dots == rows)
 	{
 		rows = 0;
-		while (map[blocks][rows])
+		while (tetr[blocks][rows])
 		{
 			dots = fill;
-			while (map[blocks][rows][dots])
+			while (tetr[blocks][rows][dots])
 			{
-				map[blocks][rows][dots] = map[blocks][rows][dots + 1];
+				tetr[blocks][rows][dots] = tetr[blocks][rows][dots + 1];
 				++dots;
 			}
 			++rows;
@@ -41,7 +41,7 @@ int		col_clean(char ***map, int blocks, int rows, int fill)
 	return (fill);
 }
 
-void	map_cleancol(char ***map)
+void	tetr_cleancol(char ***tetr)
 {
 	int blocks;
 	int rows;
@@ -50,11 +50,11 @@ void	map_cleancol(char ***map)
 	blocks = 0;
 	rows = 0;
 	fill = 0;
-	while (map[blocks])
+	while (tetr[blocks])
 	{
-		while (map[blocks][rows][fill])
+		while (tetr[blocks][rows][fill])
 		{
-			fill = col_clean(map, blocks, rows, fill);
+			fill = col_clean(tetr, blocks, rows, fill);
 			++fill;
 		}
 		++blocks;
@@ -62,7 +62,7 @@ void	map_cleancol(char ***map)
 	}
 }
 
-void	map_cleanrow(char ***map)
+void	tetr_cleanrow(char ***tetr)
 {
 	int blocks;
 	int dotrows;
@@ -70,16 +70,16 @@ void	map_cleanrow(char ***map)
 
 	blocks = 0;
 	dotrows = 0;
-	while (map[blocks])
+	while (tetr[blocks])
 	{
-		while (map[blocks][dotrows])
+		while (tetr[blocks][dotrows])
 		{
-			if (!ft_strcmp(map[blocks][dotrows], "...."))
+			if (!ft_strcmp(tetr[blocks][dotrows], "...."))
 			{
-				free(map[blocks][dotrows]);
+				free(tetr[blocks][dotrows]);
 				rows = dotrows--;
-				while (map[blocks][rows++])
-					map[blocks][rows - 1] = map[blocks][rows];
+				while (tetr[blocks][rows++])
+					tetr[blocks][rows - 1] = tetr[blocks][rows];
 			}
 			++dotrows;
 		}
@@ -88,7 +88,7 @@ void	map_cleanrow(char ***map)
 	}
 }
 
-void	map_fill(char ***map, char **str)
+void	tetr_fill(char ***tetr, char **str)
 {
 	int blocks;
 	int rows;
@@ -97,14 +97,14 @@ void	map_fill(char ***map, char **str)
 	blocks = 0;
 	rows = 0;
 	fill = 0;
-	while (map[blocks])
+	while (tetr[blocks])
 	{
-		while (map[blocks][rows])
+		while (tetr[blocks][rows])
 		{
-			while (map[blocks][rows][fill])
+			while (tetr[blocks][rows][fill])
 			{
 				if (str[blocks][rows * 5 + fill++] == '#')
-					map[blocks][rows][fill - 1] = str[blocks]\
+					tetr[blocks][rows][fill - 1] = str[blocks]\
 						[rows * 5 + fill - 1] + 30 + blocks;
 			}
 			++rows;
@@ -115,31 +115,31 @@ void	map_fill(char ***map, char **str)
 	}
 }
 
-char	***map_create(int count, int size)
+char	***tetr_create(int count, int size)
 {
-	char	***map;
+	char	***tetr;
 	int		blocks;
 	int		rows;
 	int		dots;
 
 	blocks = 0;
 	rows = 0;
-	map = (char***)malloc(sizeof(char**) * (count + 1));
+	tetr = (char***)malloc(sizeof(char**) * (count + 1));
 	while (blocks < count)
 	{
-		map[blocks] = (char**)malloc(sizeof(char*) * (size + 1));
+		tetr[blocks] = (char**)malloc(sizeof(char*) * (size + 1));
 		while (rows < size)
 		{
 			dots = 0;
-			map[blocks][rows] = ft_strnew(size);
+			tetr[blocks][rows] = ft_strnew(size);
 			while (dots < size)
-				map[blocks][rows][dots++] = '.';
+				tetr[blocks][rows][dots++] = '.';
 			++rows;
 		}
-		map[blocks][rows] = NULL;
+		tetr[blocks][rows] = NULL;
 		++blocks;
 		rows = 0;
 	}
-	map[blocks] = NULL;
-	return (map);
+	tetr[blocks] = NULL;
+	return (tetr);
 }
