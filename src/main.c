@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:29:41 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/20 22:22:16 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:43:19 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		map = read_validate(argv[1]);
-		printf("valid");
+		solution(map);
 	}
 	else
 	{

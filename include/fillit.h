@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:32:30 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/20 22:31:00 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:54:20 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	***map_create(int count, int size, char c);
 void	map_fill(char ***map, char **str);
 void	map_cleanrow(char ***map);
 void	map_cleancol(char ***map);
+void	solution(char ***map);
 char	error(void);
 
 #endif

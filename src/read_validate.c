@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:01:46 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/20 23:05:55 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:39:36 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,14 @@ char	***read_validate(char *file)
 	map_cleanrow(map);
 	map_cleancol(map);
 	i = 0;
+	while (i < count)
+	{
+		ft_strdel(&str[i]);
+		++i;
+	}
+	free(str);
+	return (map);
+	i = 0;
 	j = 0;
 	k = 0;
 	while (k < count)
@@ -147,11 +155,5 @@ char	***read_validate(char *file)
 		i = 0;
 		++k;
 	}
-	while (i < count)
-	{
-		ft_strdel(&str[i]);
-		++i;
-	}
-	free(str);
-	return (0);
+	
 }
