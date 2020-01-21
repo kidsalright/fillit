@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:43:28 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 14:48:14 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:58:00 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		backtracking(char **row, char ***map, int vars)
 	return (1);
 }
 
-char	**row_create(int size, char c)
+char	**row_create(int size)
 {
 	int		rows;
 	int		fill;
@@ -133,7 +133,7 @@ char	**row_create(int size, char c)
 	{
 		row[rows] = (char*)malloc(sizeof(char) * (size + 1));
 		while (fill < size)
-			row[rows][fill++] = c;
+			row[rows][fill++] = '.';
 		row[rows][fill] = 0;
 		fill = 0;
 		++rows;
@@ -174,12 +174,12 @@ void	solution(char ***map)
 	i = 0;
 	j = 0;
 	min_size = ft_root(2, blocks_count(map) * 4);
-	row = row_create(min_size, '.');
+	row = row_create(min_size);
 	while (backtracking(row, map, 0))
 	{
 		++min_size;
 		free_row(row);
-		row = row_create(min_size, '.');
+		row = row_create(min_size);
 	}
 	row_output(row);
 	free_row(row);

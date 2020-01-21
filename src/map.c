@@ -6,35 +6,35 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 20:58:42 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/20 23:00:40 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:14:18 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		col_clean(char ***map, int blocks, int cols, int fill)
+int		col_clean(char ***map, int blocks, int rows, int fill)
 {
 	int dots;
 
 	dots = 0;
-	while (map[blocks][cols])
+	while (map[blocks][rows])
 	{
-		if (map[blocks][cols][fill] == '.')
+		if (map[blocks][rows][fill] == '.')
 			++dots;
-		++cols;
+		++rows;
 	}
-	if (dots == cols)
+	if (dots == rows)
 	{
-		cols = 0;
-		while (map[blocks][cols])
+		rows = 0;
+		while (map[blocks][rows])
 		{
 			dots = fill;
-			while (map[blocks][cols][dots])
+			while (map[blocks][rows][dots])
 			{
-				map[blocks][cols][dots] = map[blocks][cols][dots + 1];
+				map[blocks][rows][dots] = map[blocks][rows][dots + 1];
 				++dots;
 			}
-			++cols;
+			++rows;
 		}
 		--fill;
 	}
@@ -44,46 +44,46 @@ int		col_clean(char ***map, int blocks, int cols, int fill)
 void	map_cleancol(char ***map)
 {
 	int blocks;
-	int cols;
+	int rows;
 	int fill;
 
 	blocks = 0;
-	cols = 0;
+	rows = 0;
 	fill = 0;
 	while (map[blocks])
 	{
-		while (map[blocks][cols][fill])
+		while (map[blocks][rows][fill])
 		{
-			fill = col_clean(map, blocks, cols, fill);
+			fill = col_clean(map, blocks, rows, fill);
 			++fill;
 		}
 		++blocks;
-		cols = 0;
+		fill = 0;
 	}
 }
 
 void	map_cleanrow(char ***map)
 {
 	int blocks;
+	int dotrows;
 	int rows;
-	int fill;
 
 	blocks = 0;
-	rows = 0;
+	dotrows = 0;
 	while (map[blocks])
 	{
-		while (map[blocks][rows])
+		while (map[blocks][dotrows])
 		{
-			if (!ft_strcmp(map[blocks][rows], "...."))
+			if (!ft_strcmp(map[blocks][dotrows], "...."))
 			{
-				free(map[blocks][rows]);
-				fill = rows--;
-				while (map[blocks][fill++])
-					map[blocks][fill - 1] = map[blocks][fill];
+				free(map[blocks][dotrows]);
+				rows = dotrows--;
+				while (map[blocks][rows++])
+					map[blocks][rows - 1] = map[blocks][rows];
 			}
-			++rows;
+			++dotrows;
 		}
-		rows = 0;
+		dotrows = 0;
 		++blocks;
 	}
 }
@@ -115,7 +115,7 @@ void	map_fill(char ***map, char **str)
 	}
 }
 
-char	***map_create(int count, int size, char c)
+char	***map_create(int count, int size)
 {
 	char	***map;
 	int		blocks;
@@ -133,7 +133,7 @@ char	***map_create(int count, int size, char c)
 			dots = 0;
 			map[blocks][rows] = ft_strnew(size);
 			while (dots < size)
-				map[blocks][rows][dots++] = c;
+				map[blocks][rows][dots++] = '.';
 			++rows;
 		}
 		map[blocks][rows] = NULL;

@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 14:01:46 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 13:39:36 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:04:43 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,12 @@ char	***read_validate(char *file)
 	int		count;
 	char	**str;
 	int		i;
-	int		j;
-	int		k;
 
 	if (!(count = tetr_count(file)))
 		error();
 	if (!(str = tetr_to_string(file, count)))
 		error();
-	if (!(map = map_create(count, 4, '.')))
+	if (!(map = map_create(count, 4)))
 		error();
 	map_fill(map, str);
 	map_cleanrow(map);
@@ -137,23 +135,4 @@ char	***read_validate(char *file)
 	}
 	free(str);
 	return (map);
-	i = 0;
-	j = 0;
-	k = 0;
-	while (k < count)
-	{
-		while (map[i])
-		{
-			while (map[i][j])
-			{
-				printf("%s", map[i][j]);
-				++j;
-			}
-			j = 0;
-			++i;
-		}
-		i = 0;
-		++k;
-	}
-	
 }

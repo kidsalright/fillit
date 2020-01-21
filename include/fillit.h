@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:32:30 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 13:54:20 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:00:14 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,36 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
+
+//read_validate
 char	***read_validate(char *file);
 int		tetr_count(char *file);
 int		map_validation(char *str);
 int		blocks_validation(char *str, int *hash, int *con, int *empty);
 char	**tetr_to_string(char *file, int count);
-char	***map_create(int count, int size, char c);
+
+
+//map
+char	***map_create(int count, int size);
 void	map_fill(char ***map, char **str);
 void	map_cleanrow(char ***map);
 void	map_cleancol(char ***map);
+int		col_clean(char ***map, int blocks, int cols, int fill);
+
+
+//solution
 void	solution(char ***map);
+int		blocks_count(char ***map);
+char	**row_create(int size);
+int		backtracking(char **row, char ***map, int vars);
+int		insert_check(char **row, char **map, int i, int j);
+void	insert_row(char **row, char **map, int i, int j);
+void	clean_row(char **row, char **map, int i, int j);
+int		**free_row(char **row);
+void	row_output(char **row);
+
+
+//main
 char	error(void);
 
 #endif
