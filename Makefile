@@ -6,7 +6,7 @@
 #    By: yberries <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:27:22 by yberries          #+#    #+#              #
-#    Updated: 2020/01/21 19:35:28 by yberries         ###   ########.fr        #
+#    Updated: 2020/01/21 21:48:14 by yberries         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fillit
 SRC = $(addsuffix .c, \
 	  main \
 	  read_validate \
-	  map \
+	  tetr_array \
 	  solution \
 	  output)
 
