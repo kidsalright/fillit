@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:32:30 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 22:32:09 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:19:14 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		col_clean(char ***tetr, int blocks, int rows, int fill);
 void	solution(char ***tetr);
 int		blocks_count(char ***tetr);
 char	**solve_create(int size);
-int		backtracking(char **solve, char ***tetr, int vars);
-int		insert_check(char **solve, char **tetr, int i, int j);
-void	insert_row(char **solve, char **tetr, int i, int j);
-void	clean_row(char **solve, char **tetr, int i, int j);
+int		backtracking(char **solve, char ***tetr, int blocks);
+int		insert_check(char **solve, char **tetr, int r, int f);
+void	insert_row(char **solve, char **tetr, int r, int f);
+void	clean_row(char **solve, char **tetr, int r, int f);
 void	solve_output(char **solve);
 int		**solve_free(char **solve);
 void	tetr_free(char ***tetr);
