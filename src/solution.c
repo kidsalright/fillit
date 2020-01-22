@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:43:28 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/22 16:02:07 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:03:03 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	solution(char ***tetr)
 	int		min_size;
 	char	**solve;
 
-	min_size = ft_root(2, blocks_count(tetr) * 4);
+	min_size = get_size(blocks_count(tetr) * 4);
 	solve = solve_create(min_size);
 	while (backtracking(solve, tetr, 0))
 	{

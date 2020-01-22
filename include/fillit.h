@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:32:30 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/22 15:19:14 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:02:40 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	tetr_cleanrow(char ***tetr);
 void	tetr_cleancol(char ***tetr);
 int		col_clean(char ***tetr, int blocks, int rows, int fill);
 void	solution(char ***tetr);
+int		get_size(int sqr);
 int		blocks_count(char ***tetr);
 char	**solve_create(int size);
 int		backtracking(char **solve, char ***tetr, int blocks);

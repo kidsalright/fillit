@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:29:41 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/22 00:16:43 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:01:58 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ char	error(void)
 {
 	ft_putendl("error");
 	exit(1);
+}
+
+int		get_size(int sqr)
+{
+	int i;
+
+	i = 2;
+	while (i * i < sqr)
+		++i;
+	return (i);
 }
 
 int		main(int argc, char **argv)
