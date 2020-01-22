@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 20:58:42 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/21 21:47:57 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:09:49 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	tetr_fill(char ***tetr, char **str)
 			while (tetr[blocks][rows][fill])
 			{
 				if (str[blocks][rows * 5 + fill++] == '#')
-					tetr[blocks][rows][fill - 1] = str[blocks]\
-						[rows * 5 + fill - 1] + 30 + blocks;
+					tetr[blocks][rows][fill - 1] = \
+					str[blocks][rows * 5 + fill - 1] + 30 + blocks;
 			}
 			++rows;
 			fill = 0;
