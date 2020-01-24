@@ -6,13 +6,13 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:29:41 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/22 17:01:58 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/24 17:03:00 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	error(void)
+void	error(void)
 {
 	ft_putendl("error");
 	exit(1);

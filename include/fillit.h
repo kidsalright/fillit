@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:32:30 by yberries          #+#    #+#             */
-/*   Updated: 2020/01/22 17:02:40 by yberries         ###   ########.fr       */
+/*   Updated: 2020/01/24 17:04:18 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-char	error(void);
+void	error(void);
 char	***read_validate(char *file);
 int		tetr_count(char *file);
 int		tetr_validation(char *str);
